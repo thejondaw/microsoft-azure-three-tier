@@ -1,3 +1,17 @@
+pull:
+	git pull
+
+init: pull
+	terraform init 
+
+validate: init
+	terraform validate 
+
+cleanup:
+	find / -type d  -name ".terraform" -exec rm -rf {} \;
+
+# ---------------------------------------------------------------------------
+
 asia-pacific-apply:
 		terraform workspace new  asiapacific  || terraform workspace select  asiapacific
 		terraform init   
