@@ -9,17 +9,17 @@
 
 ### Build Terraform module for a Three-Tier application on Azure:
 
-### Step #1: Sergiu Pascal, Alexander Safronov
+#### Step #1: Sergiu Pascal, Alexander Safronov
 
 - **VNET: Virtual Network**
 - **Three Public Subnets**
 
-### Step #2: Lazizbek, Abdullo
+#### Step #2: Lazizbek, Abdullo
 
 - **Linux Scale Set**
 - **Traffic Manager** which should be publicly accessible on the internet
 
-### Step #3: Chelsea Woods, Tatiana Rotaru
+#### Step #3: Chelsea Woods, Tatiana Rotaru
 
 - **Azure MySQL**
 - **Wordpress**
