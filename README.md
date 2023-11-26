@@ -7,19 +7,17 @@
 5. Tatiana Rotaru
 6. Lazizbek
 
-### Step #1: Sergiu Pascal, Alexander Safronov
+### Build Terraform module for a Three-Tier application on Azure:
 
-Build Terraform module for a Three-Tier application on Azure:
+### Step #1: Sergiu Pascal, Alexander Safronov
 
 - **VNET: Virtual Network**
 - **Three Public Subnets**
 
-This module should be able to create resource group. Once the VPC module is ready, please release. Release the module on Terraform Registry.
-
 ### Step #2: Lazizbek, Abdullo
 
-- Linux **Scale Set**
-- Linux **Scale Set** should establish its own **Traffic Manager**, which should be publicly accessible on the internet.
+- **Linux Scale Set**
+- **Traffic Manager** which should be publicly accessible on the internet
 
 ### Step #3: Chelsea Woods, Tatiana Rotaru
 
