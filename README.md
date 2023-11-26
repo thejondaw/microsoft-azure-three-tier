@@ -19,9 +19,9 @@ This module should be able to create resource group. Once the VPC module is read
 ### Step #2: Lazizbek, Abdullo
 
 - Linux **Scale Set**
-- Linux Scale Set should establish its own **Traffic Manager**, which should be publicly accessible on the internet.
+- Linux **Scale Set** should establish its own **Traffic Manager**, which should be publicly accessible on the internet.
 
 ### Step #3: Chelsea Woods, Tatiana Rotaru
 
-- Azure MySQL
-- Wordpress
+- **Azure MySQL**
+- **Wordpress**
