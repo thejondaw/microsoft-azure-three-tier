@@ -5,6 +5,7 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.azure-project.name
   allocation_method   = "Static"
   domain_name_label   = azurerm_resource_group.azure-project.name
+  sku                 = "Standard"
 }
 
 # Load Balancer (Front-End)
