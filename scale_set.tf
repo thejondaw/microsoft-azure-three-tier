@@ -45,7 +45,7 @@ resource "azurerm_lb_rule" "http" {
 }
 
 # Load Balancer - Rule - SSH
-resource "azurerm_lb_rule" "http" {
+resource "azurerm_lb_rule" "ssh" {
   loadbalancer_id                = azurerm_lb.example.id
   name                           = "SSH"
   protocol                       = "Tcp"
