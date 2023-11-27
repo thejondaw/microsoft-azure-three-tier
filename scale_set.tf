@@ -5,7 +5,6 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.azure-project.name
   allocation_method   = "Static"
   domain_name_label   = azurerm_resource_group.azure-project.name
-  sku                 = "Standard"
 }
 
 # Load Balancer (Front-End)
@@ -13,7 +12,6 @@ resource "azurerm_lb" "example" {
   name                = "Load-Balancer"
   location            = var.location
   resource_group_name = azurerm_resource_group.azure-project.name
-  sku                 = "Standard"
 
   frontend_ip_configuration {
     name                 = "Public-IP"
@@ -57,19 +55,6 @@ resource "azurerm_lb_rule" "ssh" {
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.example.id]
   probe_id                       = azurerm_lb_probe.http.id
 }
-
-# Load Balancer - Rule - ICMP
-resource "azurerm_lb_rule" "icmp" {
-  loadbalancer_id                = azurerm_lb.example.id
-  name                           = "ICMP"
-  protocol                       = "Tcp"
-  frontend_port                  = 0
-  backend_port                   = 0
-  frontend_ip_configuration_name = "Public-IP"
-  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.example.id]
-  probe_id                       = azurerm_lb_probe.http.id
-}
-
 
 # ---------------------------------------------------------------------------
 
