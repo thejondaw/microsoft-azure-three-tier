@@ -12,6 +12,7 @@ resource "azurerm_lb" "example" {
   name                = "Load-Balancer"
   location            = var.location
   resource_group_name = azurerm_resource_group.azure-project.name
+  sku                 = "Standard"
 
   frontend_ip_configuration {
     name                 = "Public-IP"
