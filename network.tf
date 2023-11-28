@@ -6,9 +6,9 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.0.0.0/16"]
 }
 
-# Subnet #1 for Azure Firewall
+# Subnet #1
 resource "azurerm_subnet" "subnet_1" {
-  name                 = "AzureFirewallSubnet"
+  name                 = "subnet_1"
   virtual_network_name = azurerm_virtual_network.vnet.name
   resource_group_name  = azurerm_resource_group.azure-project.name
   address_prefixes     = ["10.0.101.0/24"]
@@ -74,65 +74,12 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-
-  security_rule {
-    name                       = "Allow-ICMP"
-    priority                   = 103
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Icmp"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
 }
 
 # Network Security Group & Subnet #3 Association
 resource "azurerm_subnet_network_security_group_association" "nsg-sub" {
   subnet_id                 = azurerm_subnet.subnet_3.id
   network_security_group_id = azurerm_network_security_group.nsg.id
-}
-
-# ---------------------------------------------------------------------------
-
-# Public IP for Firewall
-resource "azurerm_public_ip" "firewall" {
-  name                = "testpip"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.azure-project.name
-  allocation_method   = "Static"
-  sku                 = "Standard"
-}
-
-resource "azurerm_firewall" "example" {
-  name                = "firewall"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.azure-project.name
-  sku_name            = "AZFW_VNet"
-  sku_tier            = "Standard"
-
-  ip_configuration {
-    name                 = "configuration"
-    subnet_id            = azurerm_subnet.subnet_1.id
-    public_ip_address_id = azurerm_public_ip.firewall.id
-  }
-}
-
-resource "azurerm_firewall_network_rule_collection" "example" {
-  name                = "testcollection"
-  azure_firewall_name = azurerm_firewall.example.name
-  resource_group_name = azurerm_resource_group.azure-project.name
-  priority            = 100
-  action              = "Allow"
-
-  rule {
-    name                  = "enable-icmp"
-    source_addresses      = ["10.0.0.0/16"]
-    destination_addresses = ["0.0.0.0/0"]
-    destination_ports     = ["53"]
-    protocols             = ["ICMP"]
-  }
 }
 
 # ---------------------------------------------------------------------------
