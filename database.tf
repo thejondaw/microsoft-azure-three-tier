@@ -4,8 +4,11 @@ resource "azurerm_mysql_server" "wordpress" {
   location            = var.location
   resource_group_name = azurerm_resource_group.azure-project.name
 
+# Database Name: project-db
+# Database Host: project-mysql-server.mysql.database.azure.com
   administrator_login          = "adminuser"
   administrator_login_password = "pa$$w0rd"
+  
 
   sku_name   = "B_Gen5_1"
   storage_mb = 5120
