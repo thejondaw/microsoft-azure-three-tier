@@ -6,9 +6,9 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.0.0.0/16"]
 }
 
-# Subnet #1 for Nothing
+# Subnet #1 for Azure Firewall
 resource "azurerm_subnet" "subnet_1" {
-  name                 = "subnet_1"
+  name                 = "AzureFirewallSubnet"
   virtual_network_name = azurerm_virtual_network.vnet.name
   resource_group_name  = azurerm_resource_group.azure-project.name
   address_prefixes     = ["10.0.101.0/24"]
@@ -103,7 +103,7 @@ resource "azurerm_firewall" "example" {
 
   ip_configuration {
     name                 = "configuration"
-    subnet_id            = azurerm_subnet.subnet_3.id
+    subnet_id            = azurerm_subnet.subnet_1.id
     public_ip_address_id = azurerm_public_ip.example.id
   }
 }
