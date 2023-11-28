@@ -94,6 +94,17 @@ resource "azurerm_subnet_network_security_group_association" "nsg-sub" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
+# ---------------------------------------------------------------------------
+
+# Public IP for Firewall
+resource "azurerm_public_ip" "firewall" {
+  name                = "Public-IP-Firewall"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.azure-project.name
+  allocation_method   = "Static"
+  domain_name_label   = azurerm_resource_group.azure-project.name
+}
+
 resource "azurerm_firewall" "example" {
   name                = "firewall"
   location            = var.location
@@ -104,7 +115,7 @@ resource "azurerm_firewall" "example" {
   ip_configuration {
     name                 = "configuration"
     subnet_id            = azurerm_subnet.subnet_1.id
-    public_ip_address_id = azurerm_public_ip.example.id
+    public_ip_address_id = azurerm_public_ip.firewall.id
   }
 }
 
