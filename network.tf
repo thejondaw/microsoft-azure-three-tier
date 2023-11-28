@@ -94,6 +94,35 @@ resource "azurerm_subnet_network_security_group_association" "nsg-sub" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
+resource "azurerm_firewall" "example" {
+  name                = "firewall"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.example.name
+  sku_name            = "AZFW_VNet"
+  sku_tier            = "Standard"
+
+  ip_configuration {
+    name                 = "configuration"
+    subnet_id            = azurerm_subnet.subnet_3.id
+    public_ip_address_id = azurerm_public_ip.example.id
+  }
+}
+
+resource "azurerm_firewall_network_rule_collection" "example" {
+  name                = "testcollection"
+  azure_firewall_name = azurerm_firewall.example.name
+  resource_group_name = azurerm_resource_group.azure-project.name
+  priority            = 100
+  action              = "Allow"
+
+  rule {
+    name              = "enable-icmp"
+    source_addresses  = ["10.0.0.0/16"]
+    destination_ports = ["53"]
+    protocols         = ["TCP"]
+  }
+}
+
 # ---------------------------------------------------------------------------
 
 # Public IP for Internet Gateway
