@@ -6,7 +6,7 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.0.0.0/16"]
 }
 
-# Subnet #1
+# Subnet #1 for Nothing
 resource "azurerm_subnet" "subnet_1" {
   name                 = "subnet_1"
   virtual_network_name = azurerm_virtual_network.vnet.name
