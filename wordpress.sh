@@ -41,15 +41,3 @@ y
 y
 y
 EOF
-
-# Create database and user for WordPress
-DB_NAME="${project-db}"
-DB_USER="${adminuser}"
-DB_PASSWORD="${pa$$w0rd}"
-
-mysql -e "CREATE DATABASE $DB_NAME;"
-mysql -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'project-mysql-server.mysql.database.azure.com' IDENTIFIED BY '$DB_PASSWORD';"
-mysql -e "FLUSH PRIVILEGES;"
-
-# Log in to MySQL as the WordPress user
-mysql -u $DB_USER -p
