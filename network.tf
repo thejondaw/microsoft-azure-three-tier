@@ -130,7 +130,7 @@ resource "azurerm_firewall_network_rule_collection" "example" {
     name                  = "enable-icmp"
     source_addresses      = ["10.0.0.0/16"]
     destination_addresses = ["0.0.0.0/0"]
-    destination_ports     = ["EchoRequest"]
+    destination_ports     = ["53"]
     protocols             = ["ICMP"]
   }
 }
