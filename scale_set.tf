@@ -39,13 +39,6 @@ resource "azurerm_lb_probe" "ssh" {
   port            = 22
 }
 
-# Load Balancer - Probe - ICMP
-resource "azurerm_lb_probe" "icmp" {
-  loadbalancer_id = azurerm_lb.example.id
-  name            = "icmp-running-probe"
-  port            = 0
-}
-
 # Load Balancer - Rule - HTTP
 resource "azurerm_lb_rule" "http" {
   loadbalancer_id                = azurerm_lb.example.id
