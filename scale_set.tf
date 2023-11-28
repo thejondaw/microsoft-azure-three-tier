@@ -32,6 +32,20 @@ resource "azurerm_lb_probe" "http" {
   port            = 80
 }
 
+# Load Balancer - Probe - SSH
+resource "azurerm_lb_probe" "ssh" {
+  loadbalancer_id = azurerm_lb.example.id
+  name            = "ssh-running-probe"
+  port            = 22
+}
+
+# Load Balancer - Probe - ICMP
+resource "azurerm_lb_probe" "icmp" {
+  loadbalancer_id = azurerm_lb.example.id
+  name            = "icmp-running-probe"
+  port            = 0
+}
+
 # Load Balancer - Rule - HTTP
 resource "azurerm_lb_rule" "http" {
   loadbalancer_id                = azurerm_lb.example.id
@@ -53,7 +67,19 @@ resource "azurerm_lb_rule" "ssh" {
   backend_port                   = 22
   frontend_ip_configuration_name = "Public-IP"
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.example.id]
-  probe_id                       = azurerm_lb_probe.http.id
+  probe_id                       = azurerm_lb_probe.ssh.id
+}
+
+# Load Balancer - Rule - ICMP
+resource "azurerm_lb_rule" "icmp" {
+  loadbalancer_id                = azurerm_lb.example.id
+  name                           = "ICMP"
+  protocol                       = "Icmp"
+  frontend_port                  = 0
+  backend_port                   = 0
+  frontend_ip_configuration_name = "Public-IP"
+  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.example.id]
+  probe_id                       = azurerm_lb_probe.icmp.id
 }
 
 # ---------------------------------------------------------------------------
