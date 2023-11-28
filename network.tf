@@ -101,7 +101,7 @@ resource "azurerm_public_ip" "firewall" {
   name                = "Public-IP-Firewall"
   location            = var.location
   resource_group_name = azurerm_resource_group.azure-project.name
-  allocation_method   = "Static"
+  allocation_method   = "Dynamic"
 }
 
 resource "azurerm_firewall" "example" {
