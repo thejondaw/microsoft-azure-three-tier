@@ -102,7 +102,6 @@ resource "azurerm_public_ip" "firewall" {
   location            = var.location
   resource_group_name = azurerm_resource_group.azure-project.name
   allocation_method   = "Static"
-  domain_name_label   = azurerm_resource_group.azure-project.name
 }
 
 resource "azurerm_firewall" "example" {
