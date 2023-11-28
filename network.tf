@@ -119,7 +119,7 @@ resource "azurerm_firewall_network_rule_collection" "example" {
     name              = "enable-icmp"
     source_addresses  = ["10.0.0.0/16"]
     destination_ports = ["53"]
-    protocols         = ["TCP"]
+    protocols         = ["Icmp"]
   }
 }
 
