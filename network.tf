@@ -98,10 +98,10 @@ resource "azurerm_subnet_network_security_group_association" "nsg-sub" {
 
 # Public IP for Firewall
 resource "azurerm_public_ip" "firewall" {
-  name                = "Public-IP-Firewall"
+  name                = "firewall-ip"
   location            = var.location
   resource_group_name = azurerm_resource_group.azure-project.name
-  allocation_method   = "Standard"
+  allocation_method   = "Static"
 }
 
 resource "azurerm_firewall" "example" {
