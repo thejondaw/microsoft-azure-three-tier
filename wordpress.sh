@@ -2,7 +2,6 @@
 
 # Disable SELinux
 sudo getenforce
-sudo sed 's/SELINUX=permissive/SELINUX=enforcing/g' /etc/sysconfig/selinux -i
 sudo setenforce 0
 
 # Install Apache
@@ -42,12 +41,11 @@ sudo systemctl restart httpd
 # Install Wordpress
 sudo wget https://en-gb.wordpress.org/latest-en_GB.tar.gz
 sudo tar -xf latest-en_GB.tar.gz -C /var/www/html/
-sudo mv /var/www/html/wordpress/* /var/www/html/
 sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 sudo chown -R apache:apache /var/www/html/
 
 # Set-Up Database credentials
-sudo sed 's/project-db/g' /var/www/html/wp-config.php -i
-sudo sed 's/adminuser@project-mysql-server/g' /var/www/html/wp-config.php -i
-sudo sed 's/pa$$w0rd/g' /var/www/html/wp-config.php -i
-sudo sed 's/project-mysql-server.mysql.database.azure.com/g' /var/www/html/wp-config.php -i
+sudo sed -i 's/database_name_here/project-db/g' /var/www/html/wp-config.php
+sudo sed -i 's/username_here/adminuser@project-mysql-server/g' /var/www/html/wp-config.php
+sudo sed -i 's/password_here/pa$$w0rd/g' /var/www/html/wp-config.php
+sudo sed -i 's/localhost/project-mysql-server.mysql.database.azure.com/g' /var/www/html/wp-config.php
