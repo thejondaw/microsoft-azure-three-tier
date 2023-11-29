@@ -40,8 +40,8 @@ sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-z
 sudo systemctl restart httpd
 
 # Install Wordpress
-sudo wget https://wordpress.org/latest.tar.gz
-sudo tar -xf latest.tar.gz -C /var/www/html/
+sudo wget https://en-gb.wordpress.org/latest-en_GB.tar.gz
+sudo tar -xf latest-en_GB.tar.gz -C /var/www/html/
 sudo mv /var/www/html/wordpress/* /var/www/html/
 sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 sudo chown -R apache:apache /var/www/html/
