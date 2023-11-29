@@ -10,6 +10,14 @@ sudo yum install httpd -y
 sudo systemctl start httpd
 sudo systemctl enable httpd
 
+# Install WGET and Unzip
+sudo yum install wget unzip -y
+
+# Download and extract website template
+wget https://www.free-css.com/assets/files/free-css-templates/download/page296/finexo.zip
+unzip finexo.zip
+mv finexo-html/* /var/www/html/
+
 # Install and configure MariaDB
 sudo yum install mariadb mariadb-server -y
 sudo systemctl start mariadb
@@ -30,14 +38,6 @@ sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
 sudo yum-config-manager --enable remi-php73
 sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo -y
 sudo systemctl restart httpd
-
-# Install WGET and Unzip
-sudo yum install wget unzip -y
-
-# Download and extract website template
-wget https://www.free-css.com/assets/files/free-css-templates/download/page296/finexo.zip
-unzip finexo.zip
-mv finexo-html/* /var/www/html/
 
 # Install Wordpress
 sudo wget https://wordpress.org/latest.tar.gz
