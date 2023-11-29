@@ -39,12 +39,7 @@ sudo yum-config-manager --enable remi-php73
 sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo -y
 sudo systemctl restart httpd
 
-sudo # Install WordPress
-wget https://en-gb.wordpress.org/latest-en_GB.tar.gz
-sudo tar -xf latest-en_GB.tar.gz
-sudo rm -rf /var/www/html/*
-sudo mv wordpress/* /var/www/html/
-sudo chown -R apache:apache /var/www/html
+
 
 # Set-Up Database credentials
 sudo sed 's/database_name_here/project-db/g' /var/www/html/wp-config.php -i
