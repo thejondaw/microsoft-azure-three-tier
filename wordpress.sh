@@ -13,11 +13,6 @@ sudo systemctl enable httpd
 # Install WGET and Unzip
 sudo yum install wget unzip -y
 
-# Download and extract website template
-wget https://www.free-css.com/assets/files/free-css-templates/download/page296/finexo.zip
-unzip finexo.zip
-mv finexo-html/* /var/www/html/
-
 # Install and configure MariaDB
 sudo yum install mariadb mariadb-server -y
 sudo systemctl start mariadb
