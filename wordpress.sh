@@ -45,9 +45,3 @@ sudo tar -xf latest-en_GB.tar.gz -C /var/www/html/
 sudo mv /var/www/html/wordpress/* /var/www/html/
 sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 sudo chown -R apache:apache /var/www/html/
-
-# Set-Up Database credentials
-sudo sed 's/project-db/g' /var/www/html/wp-config.php -i
-sudo sed 's/adminuser@project-mysql-server/g' /var/www/html/wp-config.php -i
-sudo sed 's/pa$$w0rd/g' /var/www/html/wp-config.php -i
-sudo sed 's/project-mysql-server.mysql.database.azure.com/g' /var/www/html/wp-config.php -i
