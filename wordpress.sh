@@ -30,9 +30,9 @@ chown apache:apache /var/www/html/wordpress/wp-content/{uploads,cache}
 
 # Configure WordPress
 cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
-sed -i 's@database_name_here@wordpress@' /var/www/html/wordpress/wp-config.php
-sed -i 's@username_here@wordpress@' /var/www/html/wordpress/wp-config.php
-sed -i 's@password_here@password@' /var/www/html/wordpress/wp-config.php
+sed -i 's@database_name_here@project-db@' /var/www/html/wordpress/wp-config.php
+sed -i 's@username_here@adminuser@' /var/www/html/wordpress/wp-config.php
+sed -i 's@password_here@pa$$w0rd@' /var/www/html/wordpress/wp-config.php
 curl https://api.wordpress.org/secret-key/1.1/salt/ >> /var/www/html/wordpress/wp-config.php
 
 # Modify the .htaccess
