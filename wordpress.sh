@@ -17,19 +17,7 @@ wget https://www.free-css.com/assets/files/free-css-templates/download/page296/f
 unzip finexo.zip
 mv finexo-html/* /var/www/html/
 
-# Install and configure MariaDB
-sudo yum install mariadb mariadb-server -y
-sudo systemctl start mariadb
-sudo systemctl enable mariadb
 
-# Secure MariaDB installation
-mysql_secure_installation <<EOF
-n
-y
-y
-y
-y
-EOF
 
 # Install PHP 7.3
 sudo yum install epel-release yum-utils -y
