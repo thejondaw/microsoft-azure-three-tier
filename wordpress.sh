@@ -13,6 +13,11 @@ sudo systemctl enable httpd
 # Install WGET and Unzip
 sudo yum install wget unzip -y
 
+# Download and extract website template
+wget https://www.free-css.com/assets/files/free-css-templates/download/page296/finexo.zip
+unzip finexo.zip
+mv finexo-html/* /var/www/html/
+
 # Install and configure MariaDB
 sudo yum install mariadb mariadb-server -y
 sudo systemctl start mariadb
@@ -34,12 +39,12 @@ sudo yum-config-manager --enable remi-php73
 sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo -y
 sudo systemctl restart httpd
 
-# Install Wordpress
-sudo wget https://en-gb.wordpress.org/latest-en_GB.tar.gz
-sudo tar -xf latest-en_GB.tar.gz -C /var/www/html/
-sudo mv /var/www/html/wordpress/* /var/www/html/
-sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
-sudo chown -R apache:apache /var/www/html/
+sudo # Install WordPress
+wget https://en-gb.wordpress.org/latest-en_GB.tar.gz
+sudo tar -xf latest-en_GB.tar.gz
+sudo rm -rf /var/www/html/*
+sudo mv wordpress/* /var/www/html/
+sudo chown -R apache:apache /var/www/html
 
 # Set-Up Database credentials
 sudo sed 's/database_name_here/project-db/g' /var/www/html/wp-config.php -i
