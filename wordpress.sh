@@ -1,13 +1,16 @@
 #!/bin/bash
 
 # Disable SELinux
-sudo getenforce
 sudo setenforce 0
 
-# Install Apache
-sudo yum install httpd mysql -y
+# Install Apache and MySQL
+sudo yum install httpd -y
 sudo systemctl start httpd
 sudo systemctl enable httpd
+
+sudo yum install mysql-server -y
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
 
 # Install WGET and Unzip
 sudo yum install wget unzip -y
@@ -24,8 +27,20 @@ sudo yum-config-manager --enable remi-php73
 sudo yum install php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo -y
 sudo systemctl restart httpd
 
-# Install Wordpress
-sudo wget https://en-gb.wordpress.org/latest-en_GB.tar.gz
-sudo tar -xf latest-en_GB.tar.gz -C /var/www/html/
-sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
-sudo chown -R apache:apache /var/www/html/
+# Install and configure MySQL for WordPress
+mysql -u root -e "CREATE DATABASE project-db;"
+mysql -u root -e "CREATE USER 'adminuser'@'localhost' IDENTIFIED BY 'wppassword';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'pa$$w0rd'@'project-mysql-server.mysql.database.azure.com';"
+mysql -u root -e "FLUSH PRIVILEGES;"
+
+# Install WordPress
+wget https://en-gb.wordpress.org/latest-en_GB.tar.gz
+tar -xf latest-en_GB.tar.gz
+rm -rf /var/www/html/*
+mv wordpress/* /var/www/html/
+chown -R apache:apache /var/www/html
+
+# Configure wp-config.php with the database details
+sed -i -e "s/database_name_here/project-db/" /var/www/html/wp-config.php
+sed -i -e "s/username_here/adminuser/" /var/www/html/wp-config.php
+sed -i -e "s/password_here/pa$$w0rd/" /var/www/html/wp-config.php
