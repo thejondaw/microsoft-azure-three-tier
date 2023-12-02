@@ -1,4 +1,6 @@
 # Public IP for Load Balancer
+
+
 resource "azurerm_public_ip" "example" {
   name                = "Public-IP"
   location            = var.location
